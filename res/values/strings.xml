@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">chrisSendMessage</string>
+    <string name="app_name">女友短信</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-
+    <string name="about">关于</string>
+    <string name ="setRandomMode">设置发送时间误差，时间不那么精确得发送给对方（误差5分钟左右）</string>
+	<string name="ok">设置</string>
+	<string name="cancel">取消</string>
+	<string name="almost">大约</string>
+	<string name="once">发送一次时间：</string>
+	<string name="everyday">每天发送时间：</string>
+	<string name="toastSucess">已经设置成功</string>
+	<string name="clickMeSetNumber">点我设置号码</string>
+	<string name="otherNumber">对方号码：</string>
+		
+	
 </resources>

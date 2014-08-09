@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.chrismessage"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    package="com.msg.gf"
+    android:versionCode="2"
+    android:versionName="2.0" >
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -10,32 +10,109 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/gfsms"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.chrismessage.MainSendActivity"
+            android:name="com.msg.gf.MainSendActivity"
             android:screenOrientation="portrait"
+  			android:theme="@android:style/Theme"
             android:label="@string/app_name" >
             
+        </activity>
+                <activity
+         	   android:name="com.msg.gf.SplashActivity"
+            	android:label="@string/app_name" 
+            	 android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            	>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+              </activity>
+                <activity
+            android:name="com.msg.gf.About"
+            android:screenOrientation="portrait"
+            android:label="@string/about" >
+            
         
+        </activity>
+        <!-- smart banner -->
+        <activity
+    android:name="net.youmi.android.SmartBannerActivity"
+    android:configChanges="keyboard|keyboardHidden|orientation"
+    android:theme="@style/Transparent">
+</activity>
+<service
+    android:name="net.youmi.android.SmartBannerService"
+    android:exported="false">
+</service>
+
+                <!-- ad -->
+                <activity
+    android:name="net.youmi.android.AdBrowser"
+    android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+    android:theme="@android:style/Theme.Light.NoTitleBar" >
+</activity>
+<service
+    android:name="net.youmi.android.AdService"
+    android:exported="false" >
+</service>
+<service
+    android:name="net.youmi.android.ExpService"
+    android:exported="false" >
+</service>
+
+<receiver
+    android:name="net.youmi.android.AdReceiver" >
+    <intent-filter>
+        <action android:name="android.intent.action.PACKAGE_ADDED" />
+        <data android:scheme="package" />
+    </intent-filter>
+</receiver>
+
+<!-- ad end -->
+
         <receiver   
-			android:name=".AlarmReceiver"  
+			android:name="com.msg.gf.AlarmReceiver"  
             android:label="@string/app_name">  
             <intent-filter>  
                 <action android:name="AlarmReceiver" />             
+            </intent-filter>  
+        </receiver>
+        
+            <receiver   
+			android:name="com.msg.gf.AlarmReceiver"
+			  
+            >  
+            <intent-filter>  
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>           
             </intent-filter>  
         </receiver>
  
     </application>
     
         
-<uses-permission android:name="android.permission.SEND_SMS"/>        
-    
+
+<uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
+<uses-permission android:name="android.permission.READ_SMS"></uses-permission>
+<uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>     
+<uses-permission android:name="android.permission.WRITE_SMS"></uses-permission>     
+<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> 
+
+<uses-permission android:name="android.permission.READ_CONTACTS"/>
+
+<!-- 权限 -->
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+<uses-permission android:name="android.permission.GET_TASKS" />
+<!-- 以下为可选权限 -->
+<uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+        
 </manifest>

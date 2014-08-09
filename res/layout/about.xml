@@ -8,7 +8,8 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="    点击菜单设置ta的号码\n    每天定时发送一条短信，再也不用担心女友会发飙，说不关心ta了。\n    追女生？一天一条短信足够啦！\n    马到成功~"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textSize="15dp"
+        android:text="    你是否被女友一句“你不爱我～”伤透了脑筋？\n    是否被逼着每天发送“晚安，宝贝”而不能尽情LOL？\n    又或者是正在追女神，那怎么表达你的恒心与诚意呢？\n    女神明天过生日，怎么在零点发送第一条祝福短信呢？\n    哈，有了女友短信这款应用，以上问题都轻松解决啦！每天发送一条定时短信给女神，生活快乐有滋味！   \n    每天定时发送一条短信，再也不用担心女友会发飙，说不关心ta了。\n    追女生？一天一条短信足够啦！\n    快点击菜单或者号码按钮设置ta的号码吧！\n    哥们我懂的，加油！ "
+        />
 
 </LinearLayout>

@@ -1,7 +1,9 @@
 /**
  * 
  */
-package com.example.chrismessage;
+package com.msg.gf;
+
+import com.msg.gf.R;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -18,3 +20,8 @@ protected void onCreate(Bundle savedInstanceState) {
 	setContentView(R.layout.about);
 }
 }
+
+
+
+
+
