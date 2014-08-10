@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.msg.gf"
+    package="com.example.chrismessage"
     android:versionCode="2"
     android:versionName="2.0" >
 
@@ -14,14 +14,14 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.msg.gf.MainSendActivity"
+            android:name="com.example.chrismessage.MainSendActivity"
             android:screenOrientation="portrait"
   			android:theme="@android:style/Theme"
             android:label="@string/app_name" >
             
         </activity>
                 <activity
-         	   android:name="com.msg.gf.SplashActivity"
+         	   android:name="com.example.chrismessage.SplashActivity"
             	android:label="@string/app_name" 
             	 android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             	>
@@ -32,7 +32,7 @@
             </intent-filter>
               </activity>
                 <activity
-            android:name="com.msg.gf.About"
+            android:name="com.example.chrismessage.About"
             android:screenOrientation="portrait"
             android:label="@string/about" >
             
@@ -75,7 +75,7 @@
 <!-- ad end -->
 
         <receiver   
-			android:name="com.msg.gf.AlarmReceiver"  
+			android:name="com.example.chrismessage.AlarmReceiver"  
             android:label="@string/app_name">  
             <intent-filter>  
                 <action android:name="AlarmReceiver" />             
@@ -83,7 +83,7 @@
         </receiver>
         
             <receiver   
-			android:name="com.msg.gf.AlarmReceiver"
+			android:name="com.example.chrismessage.AlarmReceiver"
 			  
             >  
             <intent-filter>  

@@ -1,9 +1,9 @@
 /**
  * 
  */
-package com.msg.gf;
+package com.example.chrismessage;
 
-import com.msg.gf.R;
+
 
 import android.app.Activity;
 import android.os.Bundle;

@@ -17,12 +17,12 @@
  *  limitations under the License.
  */
 
-package com.msg.wheel;
+package com.example.wheel;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import com.msg.gf.R;
+import com.example.chrismessage.R;
 
 
 import android.content.Context;
@@ -59,10 +59,10 @@ public class WheelView extends View {
 	private static final int MIN_DELTA_FOR_SCROLLING = 1;
 
 	/** Current value & label text color */
-	private static final int VALUE_TEXT_COLOR = 0xFF468db6;//0xF0000000;选择上的字的颜色
+	private static final int VALUE_TEXT_COLOR = 0xFF2E9DFC;//468db6  0xF0000000;选择上的字的颜色
 
 	/** Items text color */
-	private static final int ITEMS_TEXT_COLOR = 0xFF468db6;//0xFF000000; 未勾选的字的颜色
+	private static final int ITEMS_TEXT_COLOR = 0xFFb8b8b8;//0xFF000000; 未勾选的字的颜色
 
 	/** Top and bottom shadows colors */
 //	private static final int[] SHADOWS_COLORS = new int[] { 0xFF111111,0x00AAAAAA, 0x00AAAAAA };

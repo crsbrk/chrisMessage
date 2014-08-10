@@ -1,10 +1,10 @@
-package com.msg.gf;
+package com.example.chrismessage;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
 
-import com.msg.gf.R;
+
 
 import android.app.Activity;
 import android.app.AlarmManager;

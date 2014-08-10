@@ -1,4 +1,4 @@
-package com.msg.gf;
+package com.example.chrismessage;
 
 public class ConstApp {
 final static int FrequencyOnce = 1;

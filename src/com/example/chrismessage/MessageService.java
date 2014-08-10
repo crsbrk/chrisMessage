@@ -1,4 +1,4 @@
-package com.msg.gf;
+package com.example.chrismessage;
 
 import java.util.Calendar;
 

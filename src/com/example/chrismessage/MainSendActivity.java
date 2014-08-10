@@ -1,13 +1,12 @@
-package com.msg.gf;
+package com.example.chrismessage;
 
 import java.util.Calendar;
 
-import com.msg.wheel.NumericWheelAdapter;
-import com.msg.wheel.OnWheelChangedListener;
-import com.msg.wheel.OnWheelScrollListener;
-import com.msg.wheel.WheelView;
+import com.example.wheel.NumericWheelAdapter;
+import com.example.wheel.OnWheelChangedListener;
+import com.example.wheel.OnWheelScrollListener;
+import com.example.wheel.WheelView;
 
-import com.msg.gf.R;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -123,10 +122,10 @@ public class MainSendActivity extends Activity {
 		// int whichPic = new Random().nextInt(6);
 		// getWindow().setBackgroundDrawableResource(R.drawable.bg1);
 
-		// SmartBannerManager.init(this);
-		// SmartBannerManager.show(this);
+		//SmartBannerManager.init(this);
+		//SmartBannerManager.show(this);
 
-		// SpotManager.getInstance(this).showSpotAds(this);
+		SpotManager.getInstance(this).showSpotAds(this);
 		// 实例化广告条
 		// AdView adView = new AdView(this, AdSize.FIT_SCREEN);
 		// 获取要嵌入广告条的布局
@@ -174,6 +173,10 @@ public class MainSendActivity extends Activity {
 					@Override
 					public void onCheckedChanged(RadioGroup group, int checkedId) {
 						// TODO 自动生成的方法存根
+						String timeStringTextView = (0 == sharedPreferences
+								.getInt("random", 0)) ? "" : getResources()
+								.getString(R.string.almost);
+						
 						int id = group.getCheckedRadioButtonId();
 						System.out.println("group.getcheckradionButtonid()"
 								+ id);
@@ -182,6 +185,16 @@ public class MainSendActivity extends Activity {
 							sharedPreferences.edit()
 									.putInt("frequency", R.id.radioButtonOnce)
 									.commit();
+							
+							
+							
+
+							String sendOnceString = getResources().getString(
+									R.string.once);
+
+
+							timeTextView.setText(timeStringTextView+ sendOnceString + morningTime);
+
 							System.out.println("set once");
 							break;
 						case R.id.radioButtonEveryday:
@@ -189,6 +202,14 @@ public class MainSendActivity extends Activity {
 									.edit()
 									.putInt("frequency",
 											R.id.radioButtonEveryday).commit();
+							
+
+
+							String sendEverydayString = getResources().getString(
+									R.string.everyday);
+
+							timeTextView.setText(timeStringTextView + sendEverydayString + morningTime);
+
 							System.out.println("set everyday");
 							break;
 
@@ -267,20 +288,26 @@ public class MainSendActivity extends Activity {
 								.commit();
 						radioGroup.check(R.id.radioButtonOnce);
 					} else {
-						 String timeStringTextView =  (0==sharedPreferences.getInt("random", 0))?"":getResources().getString(R.string.almost);
-						 String sendOnceString = getResources().getString(R.string.once);
-						 String sendEverydayString = getResources().getString(R.string.everyday);
-						 
+						String timeStringTextView = (0 == sharedPreferences
+								.getInt("random", 0)) ? "" : getResources()
+								.getString(R.string.almost);
+						String sendOnceString = getResources().getString(
+								R.string.once);
+						String sendEverydayString = getResources().getString(
+								R.string.everyday);
+
 						timeTextView.setText((radioGroup
-								.getCheckedRadioButtonId() == R.id.radioButtonOnce) ? (timeStringTextView+sendOnceString + morningTime)
-								: (timeStringTextView+sendEverydayString + morningTime));
+								.getCheckedRadioButtonId() == R.id.radioButtonOnce) ? (timeStringTextView
+								+ sendOnceString + morningTime)
+								: (timeStringTextView + sendEverydayString + morningTime));
 					}
 					System.out.println("设置时间" + morningTime);
 					// sharedPreferences.edit().putString("time",
 					// morningMsg).commit();
 
 					Toast toast = Toast.makeText(getApplicationContext(),
-							getResources().getString(R.string.toastSucess), Toast.LENGTH_SHORT);
+							getResources().getString(R.string.toastSucess),
+							Toast.LENGTH_SHORT);
 					toast.setGravity(Gravity.CENTER, 0, 0);
 					toast.show();
 
@@ -376,40 +403,46 @@ public class MainSendActivity extends Activity {
 		}
 
 		if (sharedPreferences.getInt("frequency", R.id.radioButtonOnce) == R.id.radioButtonOnce) {
-			 
-			String timeStringTextView =  (0==sharedPreferences.getInt("random", 0))?"":getResources().getString(R.string.almost);
-			 String sendOnceString = getResources().getString(R.string.once);
-			 	 
-			
-			timeTextView.setText(timeStringTextView+sendOnceString + morningTime);
+
+			String timeStringTextView = (0 == sharedPreferences.getInt(
+					"random", 0)) ? "" : getResources().getString(
+					R.string.almost);
+			String sendOnceString = getResources().getString(R.string.once);
+
+			timeTextView.setText(timeStringTextView + sendOnceString
+					+ morningTime);
 			radioGroup.check(R.id.radioButtonOnce);
-		
+
 		} else {
-			 
-			String timeStringTextView =  (0==sharedPreferences.getInt("random", 0))?"":getResources().getString(R.string.almost);
-			 String sendEverydayString = getResources().getString(R.string.everyday);
-			 
-			timeTextView.setText(timeStringTextView+sendEverydayString + morningTime);
+
+			String timeStringTextView = (0 == sharedPreferences.getInt(
+					"random", 0)) ? "" : getResources().getString(
+					R.string.almost);
+			String sendEverydayString = getResources().getString(
+					R.string.everyday);
+
+			timeTextView.setText(timeStringTextView + sendEverydayString
+					+ morningTime);
 			radioGroup.check(R.id.radioButtonEveryday);
-			
+
 		}
 
 		SHASHA = sharedPreferences.getString("haoma", null);
 
 		System.out.println(" what is number:" + SHASHA + "---");
-		
+
 		String setNumStr = getResources().getString(R.string.clickMeSetNumber);
 		if (SHASHA == null) {
 			sharedPreferences.edit().putBoolean("firstStart", true).commit();
 			// System.out.println("");
-			 
+
 			numberTextView.setText(setNumStr);
-			
+
 		} else if (SHASHA.isEmpty() || SHASHA.equals("null")
 				|| SHASHA.equals("") || SHASHA == "") {
 			numberTextView.setText(setNumStr);
 		} else {
-			String otherNumber =  getResources().getString(R.string.otherNumber);
+			String otherNumber = getResources().getString(R.string.otherNumber);
 			numberTextView.setText(otherNumber + SHASHA);
 		}
 
@@ -492,30 +525,37 @@ public class MainSendActivity extends Activity {
 		// TODO 自动生成的方法存根
 		boolean firstStart = sharedPreferences.getBoolean("firstStart", true);// 是否第一次启用程序
 		Log.e("on start", "on start");
-		System.out.println(firstStart);
+		System.out.println("firststart:" + firstStart);
+
 		if (firstStart) {
 			sharedPreferences.edit().putBoolean("firstStart", false).commit();
 			setTheNumber(ConstApp.NORMAL_GET_FROM_SHAREPREFERENCE);
-			
+
 			if (SHASHA != null || SHASHA != "") {
-				numberTextView.setText(getResources().getString(R.string.otherNumber) + SHASHA);
+				numberTextView.setText(getResources().getString(
+						R.string.otherNumber)
+						+ SHASHA);
 			} else {
-				numberTextView.setText(getResources().getString(R.string.clickMeSetNumber));
+				numberTextView.setText(getResources().getString(
+						R.string.clickMeSetNumber));
 			}
 
 		} else {
 
-			int rand = sharedPreferences.getInt("random",0);
-			if (0==rand){
-				setRandomTimeButton.setImageDrawable(getResources().getDrawable(R.drawable.unsafe));
-			}else{
-				setRandomTimeButton.setImageDrawable(getResources().getDrawable(R.drawable.safe));
+			int rand = sharedPreferences.getInt("random", 0);
+			if (0 == rand) {
+				setRandomTimeButton.setImageDrawable(getResources()
+						.getDrawable(R.drawable.unsafe));
+			} else {
+				setRandomTimeButton.setImageDrawable(getResources()
+						.getDrawable(R.drawable.safe));
 			}
-			 
+
 			toggleButton.setChecked(sharedPreferences.getBoolean("toggleState",
 					false));// set toggleButton state
 			morningEditText.setText(sharedPreferences
 					.getString("neirong", null));
+
 			timeTextView.setText(sharedPreferences.getString("time", "0:00"));
 			int checkId = sharedPreferences.getInt("frequency",
 					R.id.radioButtonOnce);
@@ -531,23 +571,30 @@ public class MainSendActivity extends Activity {
 			hours.setCurrentItem(Integer.parseInt(str[0]));
 			mins.setCurrentItem(Integer.parseInt(str[1]));
 
+			String randStr = (0 == sharedPreferences.getInt("random", 0)) ? ""
+					: getResources().getString(R.string.almost);
+
 			System.out.println("checkId" + checkId);
 			if (checkId == R.id.radioButtonOnce) {
-				
-				g
-				timeTextView.setText("发送一次时间：" + time);
+
+				String sendOnceString = getResources().getString(R.string.once);
+				timeTextView.setText(randStr + sendOnceString + time);
 				radioGroup.check(R.id.radioButtonOnce);
 			} else {
-				
-				
-				timeTextView.setText("每天发送时间：" + time);
+
+				String sendEveryDay = getResources().getString(
+						R.string.everyday);
+				timeTextView.setText(randStr + sendEveryDay + time);
 				radioGroup.check(R.id.radioButtonEveryday);
 			}
 
 			if (SHASHA != null || SHASHA != "") {
-				numberTextView.setText(getResources().getString(R.string.otherNumber) + SHASHA);
+				numberTextView.setText(getResources().getString(
+						R.string.otherNumber)
+						+ SHASHA);
 			} else {
-				numberTextView.setText(getResources().getString(R.string.clickMeSetNumber));
+				numberTextView.setText(getResources().getString(
+						R.string.clickMeSetNumber));
 			}
 			// numberTextView.setText("手机号码："+SHASHA);
 
@@ -599,15 +646,21 @@ public class MainSendActivity extends Activity {
 		// final EditText
 		// twoeditext=(EditText)view.findViewById(R.id.twoeditext);
 		timePicker.setIs24HourView(true);
+		String setTimeStr = getResources().getString(R.string.setTimeStr);
+		String sureStr = getResources().getString(R.string.sureStr);
+		String cancelStr = getResources().getString(R.string.cancel);
+		new AlertDialog.Builder(this)
+				.setTitle(setTimeStr)
+				.setView(view)
+				.setPositiveButton(sureStr,
+						new DialogInterface.OnClickListener() {
 
-		new AlertDialog.Builder(this).setTitle("设置时间").setView(view)
-				.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
 
-					public void onClick(DialogInterface dialog, int which) {
+							}
 
-					}
-
-				}).setNegativeButton("取消", null).show();
+						}).setNegativeButton(cancelStr, null).show();
 
 		return timePicker;
 
@@ -617,8 +670,10 @@ public class MainSendActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
-		menu.add(0, 111, 1, "设置号码");
-		menu.add(0, 222, 2, "关于");
+		String aboutStr = getResources().getString(R.string.about);
+		String numberStr = getResources().getString(R.string.setNumberStr);
+		menu.add(0, 111, 1, numberStr);
+		menu.add(0, 222, 2, aboutStr);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -689,51 +744,62 @@ public class MainSendActivity extends Activity {
 		}
 		// showDialog(ConstApp.DIALOG_CONTACT_NUMBER);
 
+		String otherNumber = getResources().getString(R.string.setOtherNumber);
+		String sureStr = getResources().getString(R.string.sureStr);
+		String cancelStr = getResources().getString(R.string.cancel);
+		final String phoneNumberStr = getResources().getString(
+				R.string.phoneNumber);
+		final String clickMeSetNum = getResources().getString(
+				R.string.click_me_to_setnumber);
+
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("设置对方号码");
+		builder.setTitle(R.string.otherNumber);
 		builder.setView(setNumberLayout);
 
-		builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(cancelStr,
+				new DialogInterface.OnClickListener() {
 
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO 自动生成的方法存根
-				// dialog.cancel();
-			}
-		});
-
-		builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO 自动生成的方法存根
-				System.out.println("in okay");
-				// numberEdit.setText(numPhone);
-				Log.e("pick phone num", numPhone);
-
-				String num = "";
-				if (numberEdit != null) {
-					num = numberEdit.getText().toString();
-					if (num.trim() == null || num.trim() == "") {
-						// num="未设置号码";
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO 自动生成的方法存根
+						// dialog.cancel();
 					}
-				}
-				if (num != "" && num != null) // 判断是否是电话号码，以后用正则表达式判断
+				});
 
-					System.out.println(num + "");
+		builder.setPositiveButton(sureStr,
+				new DialogInterface.OnClickListener() {
 
-				SHASHA = numberEdit.getText().toString();
-				sharedPreferences.edit().putString("haoma", SHASHA).commit(); // 更新号码
-				System.out.println(SHASHA);
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO 自动生成的方法存根
+						System.out.println("in okay");
+						// numberEdit.setText(numPhone);
+						Log.e("pick phone num", numPhone);
 
-				if (SHASHA != null || SHASHA != "") {
-					numberTextView.setText("手机号码：" + SHASHA);
-				} else {
-					numberTextView.setText("点我设置女友号码");
-				}
-				// numberTextView.setText("手机号码："+SHASHA);
-			}
-		});
+						String num = "";
+						if (numberEdit != null) {
+							num = numberEdit.getText().toString();
+							if (num.trim() == null || num.trim() == "") {
+								// num="未设置号码";
+							}
+						}
+						if (num != "" && num != null) // 判断是否是电话号码，以后用正则表达式判断
+
+							System.out.println(num + "");
+
+						SHASHA = numberEdit.getText().toString();
+						sharedPreferences.edit().putString("haoma", SHASHA)
+								.commit(); // 更新号码
+						System.out.println(SHASHA);
+
+						if (SHASHA != null || SHASHA != "") {
+							numberTextView.setText(phoneNumberStr + SHASHA);
+						} else {
+							numberTextView.setText(clickMeSetNum);
+						}
+						// numberTextView.setText("手机号码："+SHASHA);
+					}
+				});
 
 		contactDialog = builder.create();
 
@@ -939,10 +1005,25 @@ public class MainSendActivity extends Activity {
 							+ mins.getCurrentItem();
 					sharedPreferences.edit().putString("time", morningTime)
 							.commit();
-					timeTextView.setText("发送时间：" + morningTime);
-					
-					if (0 != sharedPreferences.getInt("random", 0)){
-						sharedPreferences.edit().putBoolean("randomFirstFlag", true).commit();//更改时间时，如果设置为随机模式，则改变为true，否则不改变
+
+					String timeStringTextView = (0 == sharedPreferences.getInt(
+							"random", 0)) ? "" : getResources().getString(
+							R.string.almost);
+					String sendOnceString = getResources().getString(
+							R.string.once);
+					String sendEverydayString = getResources().getString(
+							R.string.everyday);
+
+					String timeTextViewStr = (sharedPreferences.getInt(
+							"frequency", R.id.radioButtonOnce) == R.id.radioButtonOnce) ? sendOnceString
+							: sendEverydayString;
+
+					timeTextView.setText(timeStringTextView + timeTextViewStr
+							+ morningTime);
+
+					if (0 != sharedPreferences.getInt("random", 0)) {
+						sharedPreferences.edit()
+								.putBoolean("randomFirstFlag", true).commit();// 更改时间时，如果设置为随机模式，则改变为true，否则不改变
 					}
 					timeChanged = false;
 
@@ -969,10 +1050,24 @@ public class MainSendActivity extends Activity {
 						+ mins.getCurrentItem();
 				sharedPreferences.edit().putString("time", morningTime)
 						.commit();
-				timeTextView.setText("发送时间：" + morningTime);
 
-				if (0 != sharedPreferences.getInt("random", 0)){
-					sharedPreferences.edit().putBoolean("randomFirstFlag", true).commit();//更改时间时，如果设置为随机模式，则改变为true，否则不改变
+				String timeStringTextView = (0 == sharedPreferences.getInt(
+						"random", 0)) ? "" : getResources().getString(
+						R.string.almost);
+				String sendOnceString = getResources().getString(R.string.once);
+				String sendEverydayString = getResources().getString(
+						R.string.everyday);
+
+				String timeTextViewStr = (sharedPreferences.getInt("frequency",
+						R.id.radioButtonOnce) == R.id.radioButtonOnce) ? sendOnceString
+						: sendEverydayString;
+
+				timeTextView.setText(timeStringTextView + timeTextViewStr
+						+ morningTime);
+
+				if (0 != sharedPreferences.getInt("random", 0)) {
+					sharedPreferences.edit()
+							.putBoolean("randomFirstFlag", true).commit();// 更改时间时，如果设置为随机模式，则改变为true，否则不改变
 				}
 
 				timeChanged = false;
@@ -1012,13 +1107,24 @@ public class MainSendActivity extends Activity {
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
 								setconfig(10);// 短信大概随机5分钟
-								timeTextView.setText(getResources().getString(R.string.almost) +timeTextView.getText());
+								timeTextView.setText(getResources().getString(
+										R.string.almost)
+										+ timeTextView.getText());
 							}
 						})
 				.setNegativeButton(R.string.cancel,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
-								// User cancelled the dialog
+								// cancel 什么也不做
+
+							}
+						})
+				.setNeutralButton(R.string.not_set,
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface arg0, int arg1) {
+								// TODO Auto-generated method stub
 								setconfig(0);// 短信精确定时发送
 							}
 						});
@@ -1027,17 +1133,20 @@ public class MainSendActivity extends Activity {
 	}
 
 	private void setconfig(int rand) {
-		
+
 		// 在alarm_record 中设置随机条件为5，只要不是0，就可以随机n分钟
 		sharedPreferences.edit().putInt("random", rand).commit();
-		
+
 		if (rand != 0) {
 			// 更改设置随机的按钮的图片
-			setRandomTimeButton.setImageDrawable(getResources().getDrawable(R.drawable.safe)); 
-			sharedPreferences.edit().putBoolean("randomFirstFlag", true).commit(); //设置第一次产生随机时间点，随机时间产生后就停止再调用随机数
+			setRandomTimeButton.setImageDrawable(getResources().getDrawable(
+					R.drawable.safe));
+			sharedPreferences.edit().putBoolean("randomFirstFlag", true)
+					.commit(); // 设置第一次产生随机时间点，随机时间产生后就停止再调用随机数
 
-		}else {
-			setRandomTimeButton.setImageDrawable(getResources().getDrawable(R.drawable.unsafe)); 
+		} else {
+			setRandomTimeButton.setImageDrawable(getResources().getDrawable(
+					R.drawable.unsafe));
 		}
 	}
 

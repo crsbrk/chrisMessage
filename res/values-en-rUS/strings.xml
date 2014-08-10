@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">gf msg</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="about">about</string>
+    <string name ="setRandomMode">messages are not sent on time. 0~5 mins late or early </string>
+	<string name="ok">set</string>
+	<string name="not_set">not set</string>
+	<string name="cancel">cancel</string>
+	
+	<string name="almost">approximate_</string>
+	<string name="once">once:</string>
+	<string name="everyday">everyday:</string>
+	<string name="once_"> once</string>
+	<string name="everyday_"> everyday</string>
+		
+	
+	<string name="toastSucess">set successfully</string>
+	<string name="clickMeSetNumber">click me to set the number</string>
+	<string name="otherNumber">to:</string>
+	<string name="setTimeStr">set time</string>
+	<string name="sureStr">sure</string>	
+	<string name="setNumberStr">set the number</string>
+	<string name="setOtherNumber">set the other number</string>
+	<string name="phoneNumber">cellphone number:</string>
+	<string name="click_me_to_setnumber">click me to set your gf number</string>
+		
+	<string name="turn_off">turn off</string>
+	<string name="turn_on">turn on to send msg</string>
+		
+</resources>
