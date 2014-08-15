@@ -28,6 +28,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 	 * 
 	 * */
 
+	
 	@Override
 	public void onReceive(Context context, Intent intent) {
 
@@ -58,6 +59,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 			// null);// 小时与分，
 			
 			String time = sharedPreferences.getString("time", null);
+			String time2 = time;
 			int randInt = 0;
 			Boolean randomFirstFlag = sharedPreferences.getBoolean("randomFirstFlag",false);
 			if (0 != (randInt =sharedPreferences.getInt("random", 0))){
@@ -96,10 +98,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 				sendMsg(context, haoma, neirong);
 				recordAfterSendSms(context, haoma, neirong);// 记录短信内容
 				
-				//短信发送结束后，需要继续设置随机时间
-				if (0!=sharedPreferences.getInt("random", 0)){
-					sharedPreferences.edit().putBoolean("randomFirstFlag", true).commit();
-				} 
+				sharedPreferences.edit().putBoolean("needChangeRandomTimeOnce", true).commit(); //设置标志位，需要改变一次随机时间
+
 				// System.out.println("frequency"+frequency+"  == FrequencyOnce"+ConstApp.FrequencyOnce);
 
 				if (frequency == R.id.radioButtonOnce) {
@@ -128,7 +128,24 @@ public class AlarmReceiver extends BroadcastReceiver {
 							.println("shendBroadcast to change state of tooglebutton");
 
 				}
+			}//end if( time
+			
+			if (sharedPreferences.getBoolean("needChangeRandomTimeOnce", false)){
+				
+				//短信发送结束后，需要继续设置随机时间
+				//如果刚发送短信后，立刻重新生成随机时间，可能会重复发送短信，例如9:10，随机范围是10分钟，
+				//也就是9:5~9:15都可能发送短信，如果第一次随机发送时间时9:5，发送过后，立刻重新定义随机时间，将9:10随机到9:7又会发送一次
+				//所以重新定义随机时间必须至少在一个随机范围（定义10分钟）之后，比如9:20之后定义随机时间，（9:15-9:25）
+				if (0!=sharedPreferences.getInt("random", 0)){
+					if(isOutOfRange(timeNow, time2, randInt )) {
+						sharedPreferences.edit().putBoolean("randomFirstFlag", true).commit();
+						sharedPreferences.edit().putBoolean("needChangeRandomTimeOnce", false).commit(); //设置标志位，已经改变了一次随机时间，不需要再次改变
+					}
+				}
+				
+
 			}
+			
 		}
 
 	}
@@ -211,6 +228,93 @@ public class AlarmReceiver extends BroadcastReceiver {
 		
 		return hour +":"+mins;
 	}
+
+	/**
+	 * 判断当前时间timeNow是否已经超过了 time2 +randInt的这个范围, 不在这个范围内 ( timeNow - time2 > randInt )
+	 * */
+	private boolean isOutOfRange(String timeNow, String time2, int randInt ){
+		String strSplit[] = timeNow.split(":");
+		int  hourNow =Integer.parseInt(strSplit[0]) ;
+		int  minsNow =Integer.parseInt(strSplit[1]) ;
+		
+		String strSplit2[] = time2.split(":");
+		int  hour =Integer.parseInt(strSplit2[0]) ;
+		int  mins =Integer.parseInt(strSplit2[1]) ;
+		
+		int minsMax ;
+		int minsMin;
+		int hourMax;
+		int hourMin;
+		
+		int range = randInt/2;
+		if ( mins - range >= 0){
+			minsMin = mins - range;
+			hourMin = hour;
+		}else {
+			minsMin = 60 -(range-mins);
+			if (hour >0) {
+				hourMin = hour - 1;
+			}else {
+				hourMin = 23;
+			}
+		}
+		System.out.println("rangMin"+ hourMin+":"+minsMin);
+		
+		if (mins + range <60){
+			minsMax = mins+range;
+			hourMax = hour;
+		}else {
+			minsMax =  mins +range - 60;
+			if ( 23 == hour ){
+				hourMax = 0;
+			}else {
+				hourMax = hour +1;
+			}
+		}
+		
+		System.out.println("rangeMax"+hourMax+":"+minsMax);
+		
+		if (isInRange(hourMin, minsMin , hourNow, minsNow ,randInt)){
+			System.out.println("now in range");
+			return false;
+		}else {
+			System.out.println("now time out of range");
+			return true;
+		}
+		
+
+		
+		
+	}
+	
+	 private boolean isInRange(int hourMin, int minsMin ,int hour, int mins , int randInt){
+	//判断时间差
+		 
+		 
+		 if (hour == hourMin){
+			 if (mins -minsMin >randInt){
+				 return false; //out of range
+			 }else {
+				 return true; // in range
+			 }
+		 } else if (hour > hourMin){
+			 if (hour - hourMin >1){
+				 return false;  //out of range
+			 }else { //hour - hourMin ==1
+				 if (60 - minsMin + mins > randInt){
+					 return false; //out of range
+				 }else {
+					 return true; //in range
+				 }
+			 }
+		 }else {  //hour < hourMin
+			 
+			 return false; // out of range
+		 }
+		 
+	 }
+	 
+	 
 
 }
 

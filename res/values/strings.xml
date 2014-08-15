@@ -5,7 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="about">关于</string>
-    <string name ="setRandomMode">设置发送短信的有时间误差，不那么精确得发送给对方（误差5分钟左右）</string>
+    <string name ="setRandomMode">不会按时发送短信，早发或晚发，范围是（0~5分钟）</string>
 	<string name="ok">设置</string>
 	<string name="not_set">不设置</string>
 	<string name="cancel">取消</string>
