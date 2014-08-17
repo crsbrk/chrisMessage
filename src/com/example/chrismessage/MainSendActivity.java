@@ -480,6 +480,7 @@ public class MainSendActivity extends Activity {
 		System.out.println();
 		pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 		aManager.setRepeating(AlarmManager.RTC, 0, 60 * 1000, pendingIntent);
+		//aManager.setInexactRepeating(AlarmManager.RTC, 0, 60 * 1000, pendingIntent);
 	}
 
 	/**

@@ -28,6 +28,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 	 * 
 	 * */
 
+	private static int sendTimes = 0;
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -94,8 +95,19 @@ public class AlarmReceiver extends BroadcastReceiver {
 				toast.show();
 
 				
-				System.out.println("messageSendSuccessfully" + neirong);
-				sendMsg(context, haoma, neirong);
+				
+				
+				//如果获取不到发送的标志，就进行发送，发送结束后，设置发送时间并设置标志为true，11:11 true
+				//当重新启动alarm 出现一分钟多次广播的情况，就可以避免多次发送
+				//发送成功之后设置 11：11 true
+				//
+				if (0 == sendTimes) {
+					sendMsg(context, haoma, neirong);
+					System.out.println("messageSendSuccessfully" + neirong);
+					sendTimes++;
+					Log.w("sendTimes", ""+sendTimes);
+				}
+				
 				recordAfterSendSms(context, haoma, neirong);// 记录短信内容
 				
 				sharedPreferences.edit().putBoolean("needChangeRandomTimeOnce", true).commit(); //设置标志位，需要改变一次随机时间
@@ -129,6 +141,11 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 				}
 			}//end if( time
+			else{  //如果发送内容为空，时间是null，定时的时间不等于现在时间
+				sendTimes=0;
+				Log.w("sendTimes", ""+sendTimes);
+			}
+			
 			
 			if (sharedPreferences.getBoolean("needChangeRandomTimeOnce", false)){
 				
